@@ -78,7 +78,6 @@
   8000). The `:join?` option specifies whether Jetty should run in the foreground
   (default false)."
   [p port PORT int "the port to listen"]
-  [& {:keys [port join?] :or {port 8000 join? false}}]
   (let [port  (or port 8000)
         join? false]
     (println
@@ -96,11 +95,6 @@
   [d docroot        PATH str "docroot for static files"
    p port           PORT int "the port to listen"
    s session-key    STR  str "a 16 byte session key"]
-  [& {:keys [port join? key docroot]
-      :or {port    8000
-           join?   false
-           key     "a 16-byte secret"
-           docroot (core/get-env :out-path)}}]
   (let [port        (or port 8000)
         session-key (or session-key "a 16-byte secret")
         join?       false
