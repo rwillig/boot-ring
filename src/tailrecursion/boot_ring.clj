@@ -32,7 +32,7 @@
   origin(s) or a single function which takes the origin as its argument 
   to return a truthy value if it is to be allowed."
   [o origins  SYM sym "permitted origins"]
-  (ring-task #(apply cors/wrap-cors % allowed-origins)))
+  (ring-task #(apply cors/wrap-cors % origins)))
 
 (deftask files
   "Ring task to serve static files.
@@ -56,7 +56,7 @@
   character string."
   [s session-key  STR str "a 16 byte session key"]
   (let [dfl-key "a 16-byte secret"
-        store   (cookie/cookie-store {:key (or key dfl-key)})]
+        store   (cookie/cookie-store {:key (or session-key dfl-key)})]
     (ring-task #(session/wrap-session % {:store store}))))
 
 (deftask dev-mode
@@ -82,10 +82,10 @@
         join? false]
     (println
       "Jetty server stored in atom here: #'tailrecursion.boot.task.ring/server...")
-    (core/with-pre-wrap
+    (core/with-pre-wrap fileset
       (swap! server
         #(or % (-> (@middleware handle-404)
-                (jetty/run-jetty {:port port :join? join?})))))))
+                (jetty/run-jetty {:port port :join? join?})))) fileset)))
 
 (deftask dev-server
   "Ring task to start a local development stack.
