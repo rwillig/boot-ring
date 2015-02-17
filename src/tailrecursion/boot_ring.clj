@@ -81,7 +81,7 @@
   (let [port  (or port 8000)
         join? false]
     (println
-      "Jetty server stored in atom here: #'tailrecursion.boot.task.ring/server...")
+      "Jetty server stored in atom here: #'tailrecursion.boot-ring/server...")
     (core/with-pre-wrap fileset
       (swap! server
         #(or % (-> (@middleware handle-404)

@@ -5,9 +5,9 @@
  :dependencies '[[org.clojure/clojure             "1.6.0"     :scope "provided"]
                  [adzerk/bootlaces                "0.1.9"     :scope "test"]
                  [adzerk/boot-test                "1.0.3"     :scope "test"]
-                 [jumblerg/ring.middleware.cors   "1.0.1"     :scope "test"]
-                 [ring/ring-jetty-adapter         "1.3.2"     :scope "test"]
-                 [ring/ring                       "1.3.2"     :scope "test"]])
+                 [jumblerg/ring.middleware.cors   "1.0.1"]
+                 [ring/ring-jetty-adapter         "1.3.2"]
+                 [ring/ring                       "1.3.2"]])
 
 (require
  '[adzerk.bootlaces :refer :all] ;; tasks: build-jar push-snapshot push-release
